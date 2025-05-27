@@ -1,0 +1,716 @@
+<<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HanaGo Travel 花語旅遊 - Bloom Your Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe5f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(233, 30, 99, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slogan {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(255, 107, 157, 0.8), rgba(233, 30, 99, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="sakura" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="3" fill="%23ffb3d1" opacity="0.6"/></pattern></defs><rect width="1200" height="600" fill="url(%23sakura)"/></svg>');
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ff9ac7" opacity="0.4"><animate attributeName="cy" values="20;80;20" dur="3s" repeatCount="indefinite"/></circle><circle cx="50" cy="40" r="1.5" fill="%23ffc4dd" opacity="0.6"><animate attributeName="cy" values="40;90;40" dur="4s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="2.5" fill="%23ff6b9d" opacity="0.3"><animate attributeName="cy" values="30;85;30" dur="5s" repeatCount="indefinite"/></circle></svg>') repeat;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 152, 0, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #e91e63;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🌸';
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Tour Package */
+        .tour-package {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tour-package:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .package-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .package-title {
+            font-size: 2rem;
+            color: #e91e63;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-price {
+            font-size: 1.5rem;
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .itinerary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .day-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #e91e63;
+            transition: all 0.3s ease;
+        }
+
+        .day-card:hover {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            transform: scale(1.02);
+        }
+
+        .day-number {
+            font-weight: bold;
+            color: #e91e63;
+            font-size: 1.2rem;
+        }
+
+        .day-theme {
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #333;
+        }
+
+        /* Interactive Features */
+        .interactive-section {
+            background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
+            padding: 3rem 0;
+            border-radius: 30px;
+            margin: 2rem 0;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.2);
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e91e63;
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.2);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #e91e63, #ff6b9d);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, #e91e63 0%, #ff6b9d 100%);
+            color: white;
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .contact-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .logo-img {
+                height: 45px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .itinerary {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Special Effects */
+        .sakura-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            color: #ff9ac7;
+            font-size: 1.5rem;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+            <div class="header-content">
+                <div>
+                    <div class="logo">
+                        <img src="HanaGo Logo.jpg" alt="HanaGo Logo" class="logo-img">
+                        <div class="logo-text">HanaGo Travel 花語旅遊</div>
+                    </div>
+                    <div class="slogan">Bloom Your Journey 開啟您的旅程之花</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">首頁</a></li>
+                        <li><a href="#tour">行程</a></li>
+                        <li><a href="#activities">體驗活動</a></li>
+                        <li><a href="#booking">預約</a></li>
+                        <li><a href="#contact">聯絡我們</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>日本櫻花之旅</h1>
+            <p>與我們一起開啟夢幻的日本之旅，感受櫻花盛開的浪漫</p>
+            <a href="#booking" class="cta-button">立即預約 ✈️</a>
+        </div>
+    </section>
+
+    <section id="tour" class="container">
+        <h2 class="section-title">精選行程</h2>
+        
+        <div class="tour-package">
+            <div class="package-header">
+                <h3 class="package-title">🌸 7天日本櫻花之旅 🌸</h3>
+                <div class="package-price">
+                    <span class="original-price">NT$28,000</span>
+                    <span>早鳥優惠 NT$25,000</span>
+                </div>
+            </div>
+
+            <div class="itinerary">
+                <div class="day-card">
+                    <div class="day-number">第1天</div>
+                    <div class="day-theme">抵達東京</div>
+                    <div>機場接送，入住酒店，歡迎晚餐</div>
+                </div>
+                <div class="day-card">
+                    <div class="day-number">第2天</div>
+                    <div class="day-theme">東京探索</div>
+                    <div>淺草寺、東京晴空塔、明治神宮</div>
+                </div>
+                <div class="day-card">
+                    <div class="day-number">第3天</div>
+                    <div class="day-theme">日光一日遊</div>
+                    <div>參觀東照宮、瀨戶橋</div>
+                </div>
+                <div class="day-card">
+                    <div class="day-number">第4天</div>
+                    <div class="day-theme">前往京都</div>
+                    <div>新幹線至京都，參觀伏見稻荷大社</div>
+                </div>
+                <div class="day-card">
+                    <div class="day-number">第5天</div>
+                    <div class="day-theme">京都寺廟與花園</div>
+                    <div>金閣寺、嵐山竹林、天龍寺</div>
+                </div>
+                <div class="day-card">
+                    <div class="day-number">第6天</div>
+                    <div class="day-theme">京都與奈良</div>
+                    <div>清水寺，奈良東大寺與鹿公園</div>
+                </div>
+                <div class="day-card">
+                    <div class="day-number">第7天</div>
+                    <div class="day-theme">離開</div>
+                    <div>最後購物，轉機場</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="interactive-section">
+        <div class="container">
+            <h2 class="section-title">特色體驗活動</h2>
+            <div class="activity-grid">
+                <div class="activity-card" onclick="showActivity('matcha')">
+                    <div class="activity-icon">🍵</div>
+                    <h3>抹茶DIY</h3>
+                    <p>現場報名，每場15人<br>自製抹茶帶回家</p>
+                </div>
+                <div class="activity-card" onclick="showActivity('yukata')">
+                    <div class="activity-icon">👘</div>
+                    <h3>浴衣試穿</h3>
+                    <p>追蹤IG+拍照上傳<br>即拍即印Polaroid</p>
+                </div>
+                <div class="activity-card" onclick="showActivity('gacha')">
+                    <div class="activity-icon">🎰</div>
+                    <h3>扭蛋抽獎</h3>
+                    <p>完成闖關集章<br>有機會抽中免費機票</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="container">
+        <h2 class="section-title">立即預約</h2>
+        
+        <div class="booking-form">
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="name">姓名 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">電話 *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="people">人數</label>
+                    <select id="people" name="people">
+                        <option value="1">1人</option>
+                        <option value="2" selected>2人</option>
+                        <option value="3">3人</option>
+                        <option value="4">4人</option>
+                        <option value="5+">5人以上</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">希望出發日期</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">特殊需求</label>
+                    <textarea id="message" name="message" rows="4" placeholder="請告訴我們您的特殊需求或問題..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">送出預約申請 🌸</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-info">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">聯絡資訊</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>📞 緊急熱線</h3>
+                    <p>+886 952-520-520<br>24-hour standby</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🇯🇵 日本服務中心</h3>
+                    <p>(03) 1314-5920</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🏢 台北總公司</h3>
+                    <p>(02) 3344-5920</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HanaGo Travel 花語旅遊. All rights reserved.</p>
+            <p>Founded in Taipei, 2023 | 18 staff members dedicated to your journey</p>
+        </div>
+    </footer>
+
+    <script>
+        // 櫻花飄落效果
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.className = 'sakura-particle';
+            sakura.innerHTML = '🌸';
+            sakura.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(sakura);
+
+            setTimeout(() => {
+                sakura.remove();
+            }, 5000);
+        }
+
+        // 每2秒產生一朵櫻花
+        setInterval(createSakura, 2000);
+
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 活動卡片互動
+        function showActivity(activity) {
+            const activities = {
+                'matcha': '🍵 抹茶DIY體驗\n\n現場報名，每場限15人\n專業老師指導，自製抹茶帶回家\n體驗日本茶道文化的精髓',
+                'yukata': '👘 浴衣試穿體驗\n\n追蹤我們的IG並拍照上傳\n提供即拍即印Polaroid\n感受日本傳統服飾之美',
+                'gacha': '🎰 幸運扭蛋抽獎\n\n完成所有闖關活動集滿印章\n有機會抽中免費日本來回機票\n還有更多精美日本小物等你來抽'
+            };
+            
+            alert(activities[activity]);
+        }
+
+        // 表單提交處理
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // 模擬表單提交
+            alert(`感謝您的預約申請！\n\n預約資訊：\n姓名：${data.name}\n電話：${data.phone}\nEmail：${data.email}\n人數：${data.people}\n\n我們將在24小時內與您聯繫確認詳細行程。\n\n櫻花季限量早鳥優惠至6/30！\n記得把握機會享受免費溫泉券！🌸`);
+            
+            // 重置表單
+            this.reset();
+        });
+
+        // 滾動時的動畫效果
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 觀察所有卡片元素
+        document.querySelectorAll('.day-card, .activity-card, .tour-package').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // 價格閃爍效果
+        setInterval(() => {
+            const priceElement = document.querySelector('.package-price');
+            if (priceElement) {
+                priceElement.style.animation = 'none';
+                setTimeout(() => {
+                    priceElement.style.animation = 'pulse 2s ease-in-out';
+                }, 10);
+            }
+        }, 5000);
+
+        // 新增CSS動畫
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
